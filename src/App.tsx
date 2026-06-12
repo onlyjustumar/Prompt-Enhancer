@@ -403,6 +403,15 @@ export default function App() {
                     Please use the <strong className="text-stone-900 font-bold">Secrets</strong> panel in AI Studio UI settings (lock icon on top right) to input a valid key named <strong className="text-stone-900 font-bold">GEMINI_API_KEY</strong>.
                   </div>
                 )}
+                {(error.toLowerCase().includes("depleted") || error.toLowerCase().includes("exhausted") || error.toLowerCase().includes("prepayment") || error.toLowerCase().includes("billing")) && (
+                  <div className="mt-2.5 p-3 rounded-lg bg-white border border-red-100 text-stone-600 font-sans space-y-2">
+                    <p>This is a billing or quota limit message from Google's Gemini API service. To fix this:</p>
+                    <ul className="list-disc pl-4 space-y-1">
+                      <li>Go to <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" className="text-stone-950 font-bold underline">Google AI Studio Console</a> to check your project billings or top up your prepay credits.</li>
+                      <li>Alternatively, set up a new project in AI Studio and configure its key as <strong className="text-stone-900 font-bold">GEMINI_API_KEY</strong> in the <strong className="text-stone-900 font-bold">Secrets</strong> menu on the top-right.</li>
+                    </ul>
+                  </div>
+                )}
               </div>
               <button onClick={() => setError(null)} className="text-xs uppercase tracking-wider font-bold text-red-500 hover:text-red-700 leading-none">
                 Dismiss

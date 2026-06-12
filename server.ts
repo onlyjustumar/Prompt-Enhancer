@@ -173,7 +173,14 @@ IMPORTANT RULES:
 
   } catch (error: any) {
     console.error("Error in /api/enhance:", error);
-    return res.status(500).json({ error: error.message || "An error occurred while enhancing your prompt." });
+    const errorMessage = error?.message || "";
+    if (errorMessage.includes("RESOURCE_EXHAUSTED") || errorMessage.includes("credits are depleted") || errorMessage.includes("prepayment")) {
+      return res.status(429).json({ 
+        error: "Your Google AI Studio prepayment credits are currently exhausted. Please go to your AI Studio account (https://aistudio.google.com/) to top up your balance, or update your GEMINI_API_KEY with a funded project key.",
+        isBillingError: true
+      });
+    }
+    return res.status(500).json({ error: errorMessage || "An error occurred while enhancing your prompt." });
   }
 });
 
