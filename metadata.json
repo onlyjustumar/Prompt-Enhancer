@@ -1,0 +1,6 @@
+{
+  "name": "AI Prompt Engineer",
+  "description": "An interactive utility that transforms vague ideas into highly optimized, rich prompts for documentaries, video scripts, and image generation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
